@@ -1,0 +1,3 @@
+rootProject.name = 'TecoCRM'
+
+include 'api_gateway'
