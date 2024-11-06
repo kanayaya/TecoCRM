@@ -1,3 +1,4 @@
 rootProject.name = 'TecoCRM'
 
 include 'api_gateway'
+include 'client_site'
