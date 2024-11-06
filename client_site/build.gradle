@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'ru.tecocrm'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
     toolchain {
@@ -41,3 +41,8 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('wrapper', Wrapper) {
+    gradleVersion = '8.2'
+}
+tasks.register("prepareKotlinBuildScriptModel"){}
