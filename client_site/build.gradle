@@ -36,6 +36,8 @@ dependencies {
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation group: 'com.fasterxml.uuid', name: 'java-uuid-generator', version: '5.1.0'
+
 }
 
 tasks.named('test') {
