@@ -15,14 +15,20 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class SynchronousKafkaService {
     private final Map<String, Waiter<String>> jsonsFromKafka = new HashMap<>();
-    public CompletableFuture<Optional<String>> sendAndGet(KafkaMethod method) {
+    public <T> CompletableFuture<Optional<KafkaMessage<T>>> sendAndGet(KafkaMethod method, JacksonTypeBuilder<T> type) {
         KafkaMessage<KafkaMethod> message = new KafkaMessage<>(method);
         Waiter<String> waiter = new Waiter<>();
         jsonsFromKafka.put(message.messageId(), waiter);
-        return CompletableFuture.supplyAsync(waiter::get);
+        return CompletableFuture.supplyAsync(() -> waiter.get().map(s -> {
+            try {
+                return new ObjectMapper().readValue(s, new JacksonTypeBuilder<>(KafkaMessage.class, type).build());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
     public void send(KafkaMethod method) {
-
+        KafkaMessage<KafkaMethod> message = new KafkaMessage<>(method);
     }
     @KafkaListener(topics = {"hueta"}, groupId = "qwe")
     public void listen(String data, Acknowledgment ack) throws JsonProcessingException {
