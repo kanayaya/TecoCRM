@@ -1,8 +1,9 @@
 package ru.tecocrm.site.synchronizer;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Singular;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,9 @@ import java.util.List;
  * Должен быть преобразован в json строку.
  */
 @Getter
+@Builder
 public class KafkaMethod {
+    private final String topic;
 
     /**
      * Имя метода. Желательно полное повторение имени целевого java-метода.
@@ -20,10 +23,13 @@ public class KafkaMethod {
     /**
      * Аргументы с которыми будет вызван метод.
      */
-    private final List<KafkaMethodArgument> arguments = new ArrayList<>();
+    @Singular("addArgument")
+    private final List<KafkaMethodArgument> arguments;
 
-    public KafkaMethod(String name) {
+    public KafkaMethod(String topic, String name, List<KafkaMethodArgument> arguments) {
+        this.topic = topic;
         this.name = name;
+        this.arguments = arguments;
     }
 
     /**

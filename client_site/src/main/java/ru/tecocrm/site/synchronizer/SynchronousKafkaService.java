@@ -2,6 +2,7 @@ package ru.tecocrm.site.synchronizer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -24,6 +25,7 @@ public class SynchronousKafkaService {
         this.sender = sender;
     }
 
+    @SneakyThrows
     public <T> CompletableFuture<Optional<KafkaMessage<T>>> sendAndGet(KafkaMethod method, JacksonTypeBuilder<T> type) {
         KafkaMessage<KafkaMethod> message = new KafkaMessage<>(method);
         sender.send("", new ObjectMapper().writeValueAsString(method));
