@@ -28,3 +28,7 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
+tasks.register('wrapper', Wrapper) {
+    gradleVersion = '8.2'
+}
+tasks.register("prepareKotlinBuildScriptModel"){}
