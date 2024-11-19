@@ -24,10 +24,15 @@ hs_err_pid*
 replay_pid*
 
 target/*
+.idea
 .idea/*
+.gradle
 .gradle/*
+.gradle/**
 gradle/*
 */gradle/*
+**/gradle/*
+**/gradle/**
 */build/*
 **/gradlew
 **/gradlew.bat
