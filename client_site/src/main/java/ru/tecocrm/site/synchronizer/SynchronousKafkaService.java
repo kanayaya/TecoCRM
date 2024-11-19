@@ -46,7 +46,7 @@ public class SynchronousKafkaService {
     @KafkaListener(topics = {"hueta"}, groupId = "qwe")
     public void listen(String data, Acknowledgment ack) throws JsonProcessingException {
         KafkaMessage message = new ObjectMapper().readValue(data, KafkaMessage.class);
-        waitersByMessageId.get(message.messageId()).set(data);
+        waitersByMessageId.get(message.messageId()).accept(data);
         ack.acknowledge();
     }
 }
