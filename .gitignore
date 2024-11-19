@@ -31,6 +31,7 @@ target/*
 .gradle/**
 gradle/*
 */gradle/*
+*/gradle/**
 **/gradle/*
 **/gradle/**
 */build/*
