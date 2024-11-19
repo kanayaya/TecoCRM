@@ -37,3 +37,4 @@ gradle/*
 */build/*
 **/gradlew
 **/gradlew.bat
+/client_site/gradle/
